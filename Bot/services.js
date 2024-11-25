@@ -1,11 +1,11 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const client = new Client({
-  authStrategy: new LocalAuth()
+  authStrategy: new LocalAuth(),
 })
 client.once('ready', () => {
   console.log('Client is ready');
-  query()
+
 })
 client.on('qr', qr => {
   qrcode.generate(qr, { small: true });
@@ -19,15 +19,12 @@ client.initialize();
 const sendMessage = async (data) => {
 
   const state = await client.getState();
-  // if (data.label == null || data.to == null || data.body == null) {
-  //   throw new Error('Something went wrong');
-  // }
+
   if (state == "PAIRING" || state == undefined || state == null) {
     return {
       msg: "Masih menghubungkan, coba lagi dalam beberapa saat..."
     }
   }
-  console.log(data);
   const validate = await validateMessage(data)
   try {
 
