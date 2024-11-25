@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const conn = async () => {
   try {
-    await mongoose.connect('mongodb+srv://ibobdb:ibobdb@cluster0.ivxav.mongodb.net/deobot?retryWrites=true&w=majority&appName=Cluster0').then(() => {
+    await mongoose.connect(process.env.DB_URL).then(() => {
       console.log('DB Connected');
     });
   } catch (err) {
